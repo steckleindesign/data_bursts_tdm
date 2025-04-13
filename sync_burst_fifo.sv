@@ -27,50 +27,37 @@ module sync_burst_fifo #(
 
     logic [WIDTH-1:0] fifo_mem[0:DEPTH-1];
     
-    logic wr_cnt, rd_cnt;
+    logic [$clog2(DEPTH)-1:0] wr_cnt, rd_cnt;
     
-    logic start_burst; // combinatorial logic
+    wire start_burst; // combinatorial logic
     
     always_ff @(posedge wr_clk)
     begin
         if (rst)
         begin
             wr_cnt <= 0;
-            // A reset on fifo mem will cause fabric FDREs to be inferred
-            // rather than block mem being inferred
+            // Resetting fifo mem will cause fabric FDREs to be inferred rather than block RAM
             // fifo_mem <= '{default: 0};
         end
         else
         begin
-            if (wr_cnt < DEPTH)
-            begin
-                fifo_mem[wr_cnt] <= din;
-                wr_cnt           <= wr_cnt + 1;
-            end
-            else
-                wr_cnt <= 0;
+            fifo_mem[wr_cnt] <= din;
+            wr_cnt <= (wr_cnt == DEPTH) ? 0 : wr_cnt + 1;
         end
     end
     
-    always_ff @(rd_clk)
+    always_ff @(posedge rd_clk)
     begin
         if (rst)
-        begin
             rd_cnt <= 0;
-        end
         else
-        begin
             if (start_burst || rd_cnt > 0)
             begin
-                if (rd_cnt < DEPTH)
-                begin
-                    dout   <= fifo_mem[rd_cnt];
-                    rd_cnt <= rd_cnt + 1;
-                end
-                else
-                    rd_cnt <= 0;
-            end 
-        end
+                dout <= fifo_mem[rd_cnt];
+                rd_cnt <= (rd_cnt == DEPTH) ? 0 : rd_cnt + 1;
+            end
     end
+    
+    assign start_burst = (wr_cnt == DEPTH - DEPTH*(WRCLKFREQMHZ/RDCLKFREQMHZ));
 
 endmodule
