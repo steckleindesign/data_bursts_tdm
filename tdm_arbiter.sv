@@ -1,0 +1,19 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tdm_arbiter #(
+    parameter DATA_WIDTH = 8,
+    parameter MUX_DEPTH  = 2
+)(
+    input  logic [DATA_WIDTH-1:0] candidates[0:MUX_DEPTH-1],
+    output logic [DATA_WIDTH-1:0] dout
+);
+
+
+
+endmodule
