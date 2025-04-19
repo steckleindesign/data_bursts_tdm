@@ -42,7 +42,7 @@ Version 4:
 module rr_tdm_top(
     input  logic clk,
     input  logic [7:0] din0, din1,
-    output logic [7:0] dout
+    output logic [15:0] dout
 );
 
     localparam WIDTH      = 8;
