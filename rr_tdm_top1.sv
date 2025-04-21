@@ -14,7 +14,7 @@ Version 2:
 
 //////////////////////////////////////////////////////////////////////////////////
 
-module rr_tdm_top2(
+module rr_tdm_top1(
     input  logic clk,
     input  logic [7:0] din0, din1,
     output logic [15:0] dout
@@ -56,7 +56,7 @@ module rr_tdm_top2(
                             
     mult #(.WIDTH_A(WIDTH),
            .WIDTH_B(INCR_WIDTH))
-          mult_inst (.clk(clk),
+          mult_inst (.clk(clk100m),
                      .din_a(rr_mux_data),
                      .din_b(incr_val),
                      .dout_p(dout));
