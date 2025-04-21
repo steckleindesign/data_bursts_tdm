@@ -10,36 +10,11 @@ Version 1:
     DPS outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
 
-Version 2:
-    Clock generated via PLL with board clock as reference
-    TDM at system clock rate
-    each system clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-
-Version 3:
-    2 clocks generated via same PLL with board clock as reference,
-        - system clock
-        - tdm clock which is 2x frequency of system clock
-    TDM at 2x system clock rate
-    each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-    
-Version 4:
-    2 clocks generated via same PLL with board clock as reference,
-        - system clock
-        - tdm clock which is 2x frequency of system clock
-    TDM at 2x system clock rate
-    each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into FIFO, the FIFO outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-
 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
-module rr_tdm_top(
+module rr_tdm_top0(
     input  logic clk,
     input  logic [7:0] din0, din1,
     output logic [15:0] dout

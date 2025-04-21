@@ -3,13 +3,6 @@
 
 /*
 
-Version 1:
-    Clock comes directly from board, no PLL
-    TDM at system clock rate
-    each system clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-
 Version 2:
     Clock generated via PLL with board clock as reference
     TDM at system clock rate
@@ -17,29 +10,11 @@ Version 2:
     DPS outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
 
-Version 3:
-    2 clocks generated via same PLL with board clock as reference,
-        - system clock
-        - tdm clock which is 2x frequency of system clock
-    TDM at 2x system clock rate
-    each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-    
-Version 4:
-    2 clocks generated via same PLL with board clock as reference,
-        - system clock
-        - tdm clock which is 2x frequency of system clock
-    TDM at 2x system clock rate
-    each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into FIFO, the FIFO outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-
 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
-module rr_tdm_top(
+module rr_tdm_top2(
     input  logic clk,
     input  logic [7:0] din0, din1,
     output logic [15:0] dout
@@ -50,6 +25,9 @@ module rr_tdm_top(
     localparam NUM_INPUTS = 2;
     localparam USE_RESET  = 0;
     
+    logic clk100m;
+    logic locked; // NC
+    
     wire [WIDTH-1:0] rr_cands[0:NUM_INPUTS-1];
     assign rr_cands[0] = din0;
     assign rr_cands[1] = din1;
@@ -57,16 +35,21 @@ module rr_tdm_top(
     logic [INCR_WIDTH-1:0] incr_val;
     logic      [WIDTH-1:0] rr_mux_data;
     
+    clk_wiz_0 mmcm_inst(.clk100m(clk100m),
+                                .reset(0), // GND
+                                .locked(locked),
+                                .clk(clk));
+    
     incrementer #(.FINAL_COUNT(INCR_WIDTH**2-1),
                   .USE_RESET(USE_RESET))
-                 incr_inst (.clk(clk),
+                 incr_inst (.clk(clk100m),
                             .rst(0),
                             .dout(incr_val));
     
     round_robin_mux #(.DATA_WIDTH(WIDTH),
                       .MUX_DEPTH(NUM_INPUTS),
                       .USE_RESET(USE_RESET))
-                     rrmux0 (.clk(clk),
+                     rrmux0 (.clk(clk100m),
                              .rst(0),
                              .candidates(rr_cands),
                              .selected_data(rr_mux_data));
