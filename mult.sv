@@ -20,14 +20,16 @@ module mult #(
     // Dual AD reg and dual B reg 1st register is inferred
     // from registering data in modules providing input data
 
-    logic         [WIDTH_A-1:0] din_a2; // Dual AD reg 2
-    logic         [WIDTH_A-1:0] din_b2; // Dual B reg 2
+    logic         [WIDTH_A-1:0] din_a1, din_a2; // Dual AD regs
+    logic         [WIDTH_A-1:0] din_b1, din_b2; // Dual B regs
     logic [WIDTH_A+WIDTH_B-1:0] m_data; // M reg
 
     always_ff @(posedge clk)
     begin
-        din_a2 <= din_a;
-        din_b2 <= din_b;
+        din_a1 <= din_a;
+        din_b1 <= din_b;
+        din_a2 <= din_a1;
+        din_b2 <= din_b1;
         m_data <= $signed(din_a2) * $signed(din_b2);
         dout_p <= m_data;
     end

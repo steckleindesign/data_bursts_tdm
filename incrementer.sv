@@ -6,12 +6,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module incrementer #(
-    parameter FINAL_COUNT = 256,
-    parameter USE_RESET = 0
+    parameter FINAL_COUNT = 255,
+    parameter USE_RESET   = 0
 )(
     input  logic clk,
     input  logic rst,
-    output logic [$clog2(FINAL_COUNT):0] dout
+    output logic [$clog2(FINAL_COUNT):0] dout // why is dout 6-bit when it should be 8-bit
 );
 
     generate
