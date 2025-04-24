@@ -7,33 +7,55 @@ Version 1:
     Clock comes directly from board, no PLL
     TDM at system clock rate
     each system clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
+    DSP outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
 
 Version 2:
     Clock generated via PLL with board clock as reference
     TDM at system clock rate
     each system clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
-    incrementer provides B input to DSP48, increments each system clock cycle
-
-Version 3:
-    2 clocks generated via same PLL with board clock as reference,
-        - system clock
-        - tdm clock which is 2x frequency of system clock
-    TDM at 2x system clock rate
-    each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into top level output port to package pin
+    DSP outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
     
+Version 3:
+    Clock generated via PLL with board clock as reference
+    TDM at system clock rate
+    each system clock cycle, data source into DSP input rotates
+    DSP pipeline registers utilized, AD regs, B reg, C reg, M reg, P reg
+    incrementer provides B input to DSP48, increments each system clock cycle
+
 Version 4:
     2 clocks generated via same PLL with board clock as reference,
         - system clock
         - tdm clock which is 2x frequency of system clock
     TDM at 2x system clock rate
     each TDM clock cycle, data source into DSP input rotates
-    DPS outputs into FIFO, the FIFO outputs into top level output port to package pin
+    DSP pipeline registers utilized, AD regs, B reg, C reg, M reg, P reg
     incrementer provides B input to DSP48, increments each system clock cycle
+    
+Version 5:
+    2 clocks generated via same PLL with board clock as reference,
+        - system clock
+        - tdm clock which is 2x frequency of system clock
+    TDM at 2x system clock rate
+    each TDM clock cycle, data source into DSP input rotates
+    DSP pipeline registers utilized, AD regs, B reg, C reg, M reg, P reg
+    DSP outputs into FIFO, the FIFO outputs into top level output port to package pin
+    incrementer provides B input to DSP48, increments each system clock cycle
+
+Version 6:
+    3 clocks generated via same PLL with board clock as reference,
+        - system clock
+        - system clock 180 degree phase shift
+        - tdm clock which is 2x frequency of system clock
+    TDM at 2x system clock rate
+    each TDM clock cycle, data source into DSP input rotates
+    DSP pipeline registers utilized, AD regs, B reg, C reg, M reg, P reg
+    DSP outputs into FIFO, the FIFO outputs into top level output port to package pin
+    incrementer provides B input to DSP48, increments each system clock cycle
+    
+Final Version:
+    
 
 */
 

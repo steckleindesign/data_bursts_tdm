@@ -27,7 +27,7 @@ module rr_tdm_top3(
     localparam NUM_INPUTS = 2;
     localparam USE_RESET  = 0;
     
-    logic clk50m, clk100m;
+    logic clk100m, clk200m;
     logic locked; // NC
     
     wire [WIDTH-1:0] rr_cands[0:NUM_INPUTS-1];

@@ -3,9 +3,10 @@
 
 /*
 
-Version 5:
-    2 clocks generated via same PLL with board clock as reference,
+Version 6:
+    3 clocks generated via same PLL with board clock as reference,
         - system clock
+        - system clock 180 degree phase shift
         - tdm clock which is 2x frequency of system clock
     TDM at 2x system clock rate
     each TDM clock cycle, data source into DSP input rotates
@@ -17,7 +18,7 @@ Version 5:
 
 //////////////////////////////////////////////////////////////////////////////////
 
-module rr_tdm_top4(
+module rr_tdm_top5(
     input  logic        clk,
     input  logic  [7:0] din0, din1,
     output logic [15:0] dout
@@ -28,21 +29,22 @@ module rr_tdm_top4(
     localparam NUM_INPUTS = 2;
     localparam USE_RESET  = 0;
     
-    logic clk100m, clk200m;
+    logic clk100m, clk100m180p, clk200m;
     logic locked; // NC
     
     wire [WIDTH-1:0] rr_cands[0:NUM_INPUTS-1];
     assign rr_cands[0] = din0;
     assign rr_cands[1] = din1;
     
-    logic [INCR_WIDTH-1:0] incr_val;
-    logic      [WIDTH-1:0] rr_mux_data;
+    logic [INCR_WIDTH-1:0] incr_val, decr_val;
+    logic      [WIDTH-1:0] rr_mux_data, incr_decr_data;
     
-    dsp_clk_mmcm dsp_mmcm_inst(.clk100m(clk100m),
-                               .clk200m(clk200m),
-                               .reset(0), // GND
-                               .locked(locked),
-                               .clk(clk));
+    clk_wiz_1 dual_sys_mmcm(.clk100m(clk100m),
+                            .clk100m180p(clk100m180p),
+                            .clk200m(clk200m),
+                            .reset(0), // GND
+                            .locked(locked),
+                            .clk(clk));
     
     incrementer #(.FINAL_COUNT(INCR_WIDTH**2-1),
                   .USE_RESET(USE_RESET))
@@ -50,6 +52,20 @@ module rr_tdm_top4(
                             .rst(0),
                             .dout(incr_val));
     
+    decrementer #(.START_COUNT(INCR_WIDTH**2-1),
+                  .USE_RESET(USE_RESET))
+                 decr_inst (.clk(clk100m180p),
+                            .rst(0),
+                            .dout(decr_val));
+    
+    round_robin_mux #(.DATA_WIDTH(WIDTH),
+                      .MUX_DEPTH(2),
+                      .USE_RESET(USE_RESET))
+                     incr_decr_rr_mux (.clk(clk200m),
+                                       .rst(0),
+                                       .candidates({incr_val,decr_val}),
+                                       .selected_data(incr_decr_data));
+                     
     round_robin_mux #(.DATA_WIDTH(WIDTH),
                       .MUX_DEPTH(NUM_INPUTS),
                       .USE_RESET(USE_RESET))
@@ -57,12 +73,12 @@ module rr_tdm_top4(
                              .rst(0),
                              .candidates(rr_cands),
                              .selected_data(rr_mux_data));
-                            
+    
     mult #(.WIDTH_A(WIDTH),
            .WIDTH_B(INCR_WIDTH))
           mult_inst (.clk(clk200m),
                      .din_a(rr_mux_data),
-                     .din_b(incr_val),
+                     .din_b(incr_decr_data),
                      .dout_p(dout));
     
 endmodule
