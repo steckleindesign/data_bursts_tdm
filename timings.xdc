@@ -1,5 +1,12 @@
 create_clock -add -name sys_clk_pin -period 83.33 -waveform {0 41.66} [get_ports {clk}];
 
+# Do we need these generated clock constraints or does vivado take care of
+# them via auto-generated clocks behind the scenes
+create_generated_clock -name sys_clk -source [get_pins dual_sys_mmcm/clk100m];
+# Could do 180deg phase shift here, invert is the same effect?
+create_generated_clock -name decr_clk -source [get_pins dual_sys_mmcm/clk100m180p] -invert;
+create_generated_clock -name tdm_clk -source [get_pins dual_sys_mmcm/clk200m] -multiply_by 2;
+
 set_input_delay -clock sys_clk_pin -min 1 [get_ports din0[0]]; # -clock_fall
 set_input_delay -clock sys_clk_pin -min 1 [get_ports din0[1]]; # -clock_fall
 set_input_delay -clock sys_clk_pin -min 1 [get_ports din0[2]]; # -clock_fall

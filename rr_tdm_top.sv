@@ -16,9 +16,14 @@ Final Version:
     DSP outputs into FIFO, the FIFO outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
 
-    // Fix clock constraints - launch and latch edge use different clocks
-    // create_generated_clocks command for MMCM clocks?
-    // Why is timing failing?
+    Fix clock constraints - launch and latch edge use different clocks
+    create_generated_clocks command for MMCM clocks?
+    Why is timing failing?
+ 
+    TIMING-6   Critical Warning  No common primary clock between related clocks                   13
+    TIMING-8   Critical Warning  No common period between related clocks                           3
+    TIMING-16  Warning           Large setup violation                                            32
+    TIMING-56  Warning           Missing logically or physically excluded clock groups constraint  4    
     
 
 
