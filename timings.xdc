@@ -19,70 +19,70 @@
 #    -multiply_by 2 \
 #    [get_pins dual_sys_mmcm/inst/mmcm_adv_inst/CLKOUT2];
 
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[0]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[1]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[2]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[3]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[4]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[5]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[6]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -min 1 [get_ports din0[7]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[0]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[1]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[2]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[3]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[4]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[5]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[6]]; # -clock_fall
-set_input_delay -clock clk100m_clk_wiz_1 -max 2 [get_ports din0[7]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[0]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[1]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[2]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[3]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[4]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[5]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[6]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 1 [get_ports din0[7]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[0]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[1]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[2]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[3]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[4]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[5]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[6]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 2 [get_ports din0[7]]; # -clock_fall
 
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[0]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[1]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[2]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[3]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[4]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[5]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[6]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -min 1 [get_ports din1[7]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[0]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[1]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[2]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[3]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[4]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[5]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[6]]; # -clock_fall
-set_input_delay -clock clk100m180p_clk_wiz_1 -max 2 [get_ports din1[7]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[0]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[1]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[2]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[3]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[4]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[5]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[6]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -min 1 [get_ports din1[7]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[0]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[1]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[2]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[3]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[4]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[5]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[6]]; # -clock_fall
+set_input_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m180p]] -max 2 [get_ports din1[7]]; # -clock_fall
 
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[0]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[1]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[2]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[3]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[4]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[5]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[6]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[7]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[8]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[9]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[10]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[11]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[12]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[13]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[14]];
-set_output_delay -clock clk200m_clk_wiz_1 -min 1 [get_ports dout[15]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[0]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[1]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[2]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[3]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[4]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[5]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[6]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[7]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[8]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[9]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[10]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[11]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[12]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[13]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[14]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -min 1 [get_ports dout[15]];
 
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[0]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[1]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[2]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[3]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[4]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[5]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[6]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[7]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[8]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[9]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[10]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[11]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[12]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[13]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[14]];
-set_output_delay -clock clk200m_clk_wiz_1 -max 2 [get_ports dout[15]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[0]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[1]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[2]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[3]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[4]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[5]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[6]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[7]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[8]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[9]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[10]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[11]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[12]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[13]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[14]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk200m]] -max 2 [get_ports dout[15]];
