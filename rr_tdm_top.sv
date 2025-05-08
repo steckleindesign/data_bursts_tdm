@@ -19,14 +19,14 @@ Final Version:
     Fix clock constraints - launch and latch edge use different clocks
     create_generated_clocks command for MMCM clocks?
     Why is timing failing?
- 
-    TIMING-6   Critical Warning  No common primary clock between related clocks                   13
-    TIMING-8   Critical Warning  No common period between related clocks                           3
-    TIMING-16  Warning           Large setup violation                                            32
-    TIMING-56  Warning           Missing logically or physically excluded clock groups constraint  4    
     
-
-
+    Weird long delay from registers after and outside the DSP48
+    which drives the dout reg array
+    
+    Why do the registers get weird names like
+    "din_rr_mux/genblk1_0.selected_data_reg[*]_psdsp_*"
+    ???
+    
 */
 
 //////////////////////////////////////////////////////////////////////////////////
