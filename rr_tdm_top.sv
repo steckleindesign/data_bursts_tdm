@@ -48,6 +48,9 @@ module rr_tdm_top(
     logic      [WIDTH-1:0] rr_mux_data, incr_decr_data;
     logic      [WIDTH-1:0] din0_buffered, din1_buffered;
     
+    // Consider BUFGCE_DIV to reduce skew?
+    // Check if we need a BUFG on the CLKOFBOUT connection to CLKFBIN
+    // Seems large setup violtions may be due to IO timings? need to study...
     clk_wiz_1 dual_sys_mmcm(.clk100m(clk100m),
                             .clk100m180p(clk100m180p),
                             .clk200m(clk200m),
