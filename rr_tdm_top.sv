@@ -27,6 +27,17 @@ Final Version:
     "din_rr_mux/genblk1_0.selected_data_reg[*]_psdsp_*"
     ???
     
+    No pins match 'dual_sys_mmcm/inst/clk...' warning
+    Must not be found before synthesis, but found after
+    synthesis and before implementation
+    
+    Why these bounds?
+    Parameter FINAL_COUNT bound to: 63 - type: integer 
+	Parameter USE_RESET bound to: 1 - type: integer
+	Parameter START_COUNT bound to: 63 - type: integer
+	Parameter DATA_WIDTH bound to: 8 - type: integer 
+	Parameter MUX_DEPTH bound to: 2 - type: integer
+    
 */
 
 //////////////////////////////////////////////////////////////////////////////////
