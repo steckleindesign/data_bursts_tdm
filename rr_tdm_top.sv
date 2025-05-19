@@ -19,6 +19,7 @@ Final Version:
     Fix clock constraints - launch and latch edge use different clocks
     create_generated_clocks command for MMCM clocks?
     Why is timing failing?
+    Might need to use a separate IO clock and have async crossings to and from IOBs
     
     Weird long delay from registers after and outside the DSP48
     which drives the dout reg array
@@ -37,6 +38,8 @@ Final Version:
 	Parameter START_COUNT bound to: 63 - type: integer
 	Parameter DATA_WIDTH bound to: 8 - type: integer 
 	Parameter MUX_DEPTH bound to: 2 - type: integer
+	
+	
     
 */
 
@@ -69,13 +72,13 @@ module rr_tdm_top(
                             .locked(locked),
                             .clk(clk));
     
-    incrementer #(.FINAL_COUNT(INCR_WIDTH**2-1),
+    incrementer #(.FINAL_COUNT(2**INCR_WIDTH-1),
                   .USE_RESET(USE_RESET))
                  incr_inst (.clk(clk100m),
                             .rst(locked),
                             .dout(incr_val));
     
-    decrementer #(.START_COUNT(INCR_WIDTH**2-1),
+    decrementer #(.START_COUNT(2**INCR_WIDTH-1),
                   .USE_RESET(USE_RESET))
                  decr_inst (.clk(clk100m180p),
                             .rst(locked),
