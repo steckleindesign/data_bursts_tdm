@@ -61,6 +61,7 @@ module rr_tdm_top(
     logic [INCR_WIDTH-1:0] incr_val, decr_val;
     logic      [WIDTH-1:0] rr_mux_data, incr_decr_data;
     logic      [WIDTH-1:0] din0_buffered, din1_buffered;
+    logic      [WIDTH-1:0] mult_dout;
     
     // Consider BUFGCE_DIV to reduce skew?
     // Check if we need a BUFG on the CLKOFBOUT connection to CLKFBIN
@@ -115,6 +116,16 @@ module rr_tdm_top(
           mult_inst (.clk(clk200m),
                      .din_a(rr_mux_data),
                      .din_b(incr_decr_data),
-                     .dout_p(dout));
+                     .dout_p(mult_dout));
+    
+    funnnel_2to1 (.clk(clk200m),
+                  .data200m(mult_dout),
+                  .dout0(),
+                  .dout1());
+    
+    post_processing (.clk(clk100m),
+                     .din0(),
+                     .din1(),
+                     .dout100m(dout));
     
 endmodule
