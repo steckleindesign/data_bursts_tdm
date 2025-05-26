@@ -37,3 +37,4 @@ set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { dout[1
 set_property -dict { PACKAGE_PIN W15   IOSTANDARD LVCMOS33 } [get_ports { dout[13] }];
 set_property -dict { PACKAGE_PIN W13   IOSTANDARD LVCMOS33 } [get_ports { dout[14] }];
 set_property -dict { PACKAGE_PIN W14   IOSTANDARD LVCMOS33 } [get_ports { dout[15] }];
+set_property -dict { PACKAGE_PIN U15   IOSTANDARD LVCMOS33 } [get_ports { dout[16] }];

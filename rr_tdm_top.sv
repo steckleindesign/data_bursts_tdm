@@ -32,7 +32,7 @@ Final Version:
 module rr_tdm_top(
     input  logic        clk,
     input  logic  [7:0] din0, din1,
-    (* IOB = "TRUE" *) output logic [15:0] dout
+    (* IOB = "TRUE" *) output logic [16:0] dout
 );
 
     localparam WIDTH      = 8;
@@ -42,11 +42,12 @@ module rr_tdm_top(
     
     logic clk100m, clk100m180p, clk200m;
     logic locked; // global reset for much essentially
-    logic [INCR_WIDTH-1:0] incr_val, decr_val;
-    logic      [WIDTH-1:0] rr_mux_data, incr_decr_data;
-    logic      [WIDTH-1:0] din0_buffered, din1_buffered;
-    logic      [WIDTH-1:0] mult_dout;
-    logic      [WIDTH-1:0] mult_data0_100m, mult_data1_100m;
+    // Data
+    logic       [INCR_WIDTH-1:0] incr_val, decr_val;
+    logic            [WIDTH-1:0] rr_mux_data, incr_decr_data;
+    logic            [WIDTH-1:0] din0_buffered, din1_buffered;
+    logic [INCR_WIDTH+WIDTH-1:0] mult_dout;
+    logic [INCR_WIDTH+WIDTH-1:0] mult_data0_100m, mult_data1_100m;
     
     // Consider BUFGCE_DIV to reduce skew?
     // Check if we need a BUFG on the CLKOFBOUT connection to CLKFBIN
@@ -70,7 +71,7 @@ module rr_tdm_top(
                             .rst(locked),
                             .dout(decr_val));
     
-    round_robin_mux #(.DATA_WIDTH(WIDTH),
+    round_robin_mux #(.DATA_WIDTH(INCR_WIDTH),
                       .MUX_DEPTH(2),
                       .USE_RESET(USE_RESET))
                      incr_decr_rr_mux (.clk(clk200m),
@@ -103,14 +104,18 @@ module rr_tdm_top(
                      .din_b(incr_decr_data),
                      .dout_p(mult_dout));
     
-    funnel_1to2 (.clk(clk200m),
-                  .data200m(mult_dout),
-                  .dout0(mult_data0_100m),
-                  .dout1(mult_data1_100m));
+    funnel_1to2 #(.WIDTH(WIDTH+INCR_WIDTH))
+                 funnel_inst (.clk(clk200m),
+                              .data200m(mult_dout),
+                              .dout0(mult_data0_100m),
+                              .dout1(mult_data1_100m));
     
-    post_processing (.clk(clk100m),
-                     .din0(mult_data0_100m),
-                     .din1(mult_data1_100m),
-                     .dout100m(dout));
+    post_processing  #(.WIDTH(WIDTH+INCR_WIDTH))
+                      pproc_inst (.clk(clk100m),
+                                  .din0(mult_data0_100m),
+                                  .din1(mult_data1_100m),
+                                  .dout100m(dout));
+    
+    // Top level output width is 17 (8 + 8 + 1)
     
 endmodule
