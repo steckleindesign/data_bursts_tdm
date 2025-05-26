@@ -15,14 +15,6 @@ Final Version:
     DSP pipeline registers utilized, AD regs, B reg, C reg, M reg, P reg
     DSP outputs into FIFO, the FIFO outputs into top level output port to package pin
     incrementer provides B input to DSP48, increments each system clock cycle
-
-    Fix clock constraints - launch and latch edge use different clocks
-    create_generated_clocks command for MMCM clocks?
-    Why is timing failing?
-    Might need to use a separate IO clock and have async crossings to and from IOBs
-    
-    Weird long delay from registers after and outside the DSP48
-    which drives the dout reg array
     
     Why do the registers get weird names like
     "din_rr_mux/genblk1_0.selected_data_reg[*]_psdsp_*"
@@ -32,15 +24,7 @@ Final Version:
     Must not be found before synthesis, but found after
     synthesis and before implementation
     
-    Why these bounds?
-    Parameter FINAL_COUNT bound to: 63 - type: integer 
-	Parameter USE_RESET bound to: 1 - type: integer
-	Parameter START_COUNT bound to: 63 - type: integer
-	Parameter DATA_WIDTH bound to: 8 - type: integer 
-	Parameter MUX_DEPTH bound to: 2 - type: integer
-	
-	
-    
+    Try using both edges of 100m clk instead of generating 200m and using rising edges
 */
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +46,7 @@ module rr_tdm_top(
     logic      [WIDTH-1:0] rr_mux_data, incr_decr_data;
     logic      [WIDTH-1:0] din0_buffered, din1_buffered;
     logic      [WIDTH-1:0] mult_dout;
+    logic      [WIDTH-1:0] mult_data0_100m, mult_data1_100m;
     
     // Consider BUFGCE_DIV to reduce skew?
     // Check if we need a BUFG on the CLKOFBOUT connection to CLKFBIN
@@ -97,7 +82,7 @@ module rr_tdm_top(
                     in_fifo_a (.clk(clk100m),
                                .din(din0),
                                .dout(din0_buffered));
-                               
+    
     fifo_in_buffer #(.DATA_WIDTH(WIDTH))
                     in_fifo_b (.clk(clk100m180p),
                                .din(din1),
@@ -118,14 +103,14 @@ module rr_tdm_top(
                      .din_b(incr_decr_data),
                      .dout_p(mult_dout));
     
-    funnnel_2to1 (.clk(clk200m),
+    funnel_1to2 (.clk(clk200m),
                   .data200m(mult_dout),
-                  .dout0(),
-                  .dout1());
+                  .dout0(mult_data0_100m),
+                  .dout1(mult_data1_100m));
     
     post_processing (.clk(clk100m),
-                     .din0(),
-                     .din1(),
+                     .din0(mult_data0_100m),
+                     .din1(mult_data1_100m),
                      .dout100m(dout));
     
 endmodule
