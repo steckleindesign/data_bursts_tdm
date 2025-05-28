@@ -1,0 +1,46 @@
+Artix 7
+xc7a35tcgp236-1
+
+get_clocks
+clk clkfbout_clk_wiz_1 clk100m_clk_wiz_1 clk100m180p_clk_wiz_1 clk200m_clk_wiz_1
+
+get_clock_regions
+X0Y0 X1Y0 X0Y1 X1Y1 X0Y2 X1Y2
+
+
+
+Get input fifo A
+Get input fifo B
+
+Get incr inst LUTs
+Get incr inst FFs
+Get incr decr LUTs
+Get incr decr FFs
+
+Get all CARRY4
+
+Search genblk1_0
+Search selected_data_reg
+Search genblk1_0.selected_data_reg
+
+Get control signals
+Get clock enables
+Get resets
+
+Get din_rr_mux FFs
+
+Get incr_decr_rr_mux FFs
+
+Get DSP inputs
+
+Get mult_inst FFs
+
+Get funnel inst
+
+Get pproc_inst data_acc_reg
+Get pproc_inst data100m_reg
+
+Get IOB
+
+
+
