@@ -7,24 +7,48 @@ clk clkfbout_clk_wiz_1 clk100m_clk_wiz_1 clk100m180p_clk_wiz_1 clk200m_clk_wiz_1
 get_clock_regions
 X0Y0 X1Y0 X0Y1 X1Y1 X0Y2 X1Y2
 
+Get in_fifo_a
+show_objects -name find_9 [get_cells -hierarchical "in_fifo_a" ]
 
+Get in_fifo_a FFs
+show_objects -name find_6 [get_cells -hierarchical -filter { PRIMITIVE_TYPE == FLOP_LATCH.FLOP.FDRE && NAME =~  "*in_fifo_a*" } ]
 
-Get input fifo A
 Get input fifo B
+DEVICE
 
 Get incr inst LUTs
+show_objects -name find_9 [get_cells -hierarchical -filter { NAME =~  "*incr_inst*" && PRIMITIVE_TYPE =~ LUT.*.* } ]
+
 Get incr inst FFs
+show_objects -name find_11 [get_cells -hierarchical -filter { NAME =~  "*incr_inst*" && PRIMITIVE_TYPE == FLOP_LATCH.FLOP.FDRE } ]
+
 Get incr decr LUTs
-Get incr decr FFs
+DEVICE
+
+Get incr FFs
+DEVICE
+
+Get decr FFs
+show_objects -name find_17 [get_cells -hierarchical -filter { PARENT =~  "decr_inst" && PRIMITIVE_TYPE == FLOP_LATCH.FLOP.FDRE } ]
 
 Get all CARRY4
+show_objects -name find_12 [get_cells -hierarchical -filter { PRIMITIVE_TYPE == CARRY.OTHERS.CARRY4 } ]
 
-Search genblk1_0
+Search genblk1 FFs
+show_objects -name find_14 [get_cells -hierarchical -filter { NAME =~  "*genblk*" && PRIMITIVE_TYPE == FLOP_LATCH.FLOP.FDRE } ]
+
+Search genblk1 NOT FFs
+show_objects -name find_14 [get_cells -hierarchical -filter { NAME =~  "*genblk*" && PRIMITIVE_TYPE == FLOP_LATCH.FLOP.FDRE } ]
+
 Search selected_data_reg
+
 Search genblk1_0.selected_data_reg
 
 Get control signals
-Get clock enables
+
+Get clock primitives
+show_objects -name find_39 [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ CLK.*.* } ]
+
 Get resets
 
 Get din_rr_mux FFs
