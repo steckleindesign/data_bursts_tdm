@@ -31,8 +31,9 @@ Final Version:
 
 module rr_tdm_top(
     input  logic        clk,
-    input  logic  [7:0] din0, din1,
+    (* IOB = "TRUE" *) input  logic  [7:0] din0, din1,
     (* IOB = "TRUE" *) output logic [16:0] dout
+    // output logic [16:0] dout
 );
 
     localparam WIDTH      = 8;
