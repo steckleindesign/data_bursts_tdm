@@ -69,6 +69,7 @@ set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 0.5 [get_ports dout[13]];
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 0.5 [get_ports dout[14]];
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 0.5 [get_ports dout[15]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -min 0.5 [get_ports dout[16]];
 
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[0]];
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[1]];
@@ -86,3 +87,4 @@ set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[13]];
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[14]];
 set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[15]];
+set_output_delay -clock [get_clocks -of_objects [get_pins dual_sys_mmcm/inst/clk100m]] -max 1 [get_ports dout[16]];
