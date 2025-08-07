@@ -7,7 +7,7 @@ module rr_tdm_top(
                        input  logic        clk,
                        
     (* IOB = "TRUE" *) input  logic  [7:0] din0,       din1,
-    (* IOB = "TRUE" *) input  logic        din0_valid, din1_valid,
+    // (* IOB = "TRUE" *) input  logic        din0_valid, din1_valid,
     (* IOB = "TRUE" *) output logic [16:0] dout
 );
 
@@ -54,23 +54,38 @@ module rr_tdm_top(
                           .candidates({incr_val,decr_val}),
                           .selected_data(incr_decr_data));
     
-    data_capture
-        data_capture_inst (.i_clk(clk200m),
-                           .i_din0(din0),
-                           .i_din1(din1),
-                           .i_din0_valid(din0_valid),
-                           .i_din1_valid(din1_valid),
-                           .o_dout0(din0_captured),
-                           .o_dout1(din1_captured));
+//    data_capture
+//        data_capture_inst (.i_clk(clk200m),
+//                           .i_din0(din0),
+//                           .i_din1(din1),
+//                           .i_din0_valid(din0_valid),
+//                           .i_din1_valid(din1_valid),
+//                           .o_dout0(din0_captured),
+//                           .o_dout1(din1_captured));
+    
+    // Meet I/O hold timing by
+    //  Adjusting the trace lengths on the PCB (increase set_input_delay -min accordingly)
+    //  Using IDELAY primitive and setting large enough delay taps
+    //  Phase shifting the MMCM 100MHz clocks so data is aligned properly to the latch clock edge
+    //      Virtual clock to set a phase shifted capture clock from the virtual launch clock?
+    //      Or just set the launch clock to clk input?
+    //          In this case the MMCM output clock should not only be 180 phase offset of each other
+    //              but also each common mode shifted back from clk so the clocks are aligned with din
+    //                  din0 is synchronous with delay with respect to clk rising edge
+    //                      din is synchronous with delay with respect to clk falling edge
+    //      Is the MMCM output clocks actually phase aligned with the clk input?
+    //          Sort of? But its not exact
+    
+    // IBUF (inbuf) (input buffer) propagation delay seems to range 0.2ns - 1.4ns
     
     data_buffer #(.DATA_WIDTH(WIDTH))
         din_buf_a (.clk(clk100m),
-                   .din(din0_captured),
+                   .din(din0),
                    .dout(din0_buffered));
     
     data_buffer #(.DATA_WIDTH(WIDTH))
         din_buf_b (.clk(clk100m180p),
-                   .din(din1_captured),
+                   .din(din1),
                    .dout(din1_buffered));
     
     round_robin_mux #(.DATA_WIDTH(WIDTH),
